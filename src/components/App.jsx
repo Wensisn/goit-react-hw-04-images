@@ -11,7 +11,7 @@ export function OldApp() {
   const [photos, setPhotos] = useState([]);
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
-  const [status, setStatus] = useState('idle');
+
   const [totalPictures, setTotalPictures] = useState(null);
 
   useEffect(() => {
@@ -21,10 +21,9 @@ export function OldApp() {
 
     async function fetchPicture() {
       setIsLoading(true);
-      setStatus('pending');
+
       try {
         const newPicture = await FetchImages(searchQuery, page);
-        setStatus('resolved');
         setPhotos(prevPictures => [...prevPictures, ...newPicture.hits]);
         setTotalPictures(newPicture.totalHits);
         setTimeout(() => {
@@ -35,12 +34,10 @@ export function OldApp() {
         }, 100);
 
         if (newPicture.totalHits === 0) {
-          setStatus('rejected');
           return;
         }
       } catch (error) {
         console.error(error);
-        setStatus('rejected');
       } finally {
         setIsLoading(false);
       }
