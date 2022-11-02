@@ -1,42 +1,44 @@
 import { FaSearch } from 'react-icons/fa';
 import PropTypes from 'prop-types';
-import { ifEmptySearchAlert } from '../Notiflix/Notiflix';
-import { useState } from 'react';
+import { Formik, Form, Field } from 'formik';
+import * as yup from 'yup';
 import css from './Searchbar.module.css';
 
 export const Searchbar = ({ setSearchQuery }) => {
-  const [inputText, setInputText] = useState('');
-
-  const handleFormSubmit = event => {
-    event.preventDefault();
-    setSearchQuery(inputText);
-
-    if (setInputText === '') {
-      ifEmptySearchAlert();
-    }
+  const schema = yup.object().shape({
+    name: yup.string().required(),
+  });
+  const initialValues = {
+    name: '',
   };
-  const handleInputChange = event => {
-    setInputText(event.target.value);
+
+  const handleSubmit = values => {
+    setSearchQuery(values);
   };
 
   return (
     <header className={css.searchbar}>
-      <form className={css.form} onSubmit={handleFormSubmit}>
-        <button type="submit" className={css.button}>
-          <span className={css.span}>
-            <FaSearch />
-          </span>
-        </button>
-
-        <input
-          className={css.input}
-          name="searchQuery"
-          autoComplete="off"
-          autoFocus
-          placeholder="Search images and photos"
-          onChange={handleInputChange}
-        />
-      </form>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={handleSubmit}
+        validationSchema={schema}
+      >
+        <Form className={css.form}>
+          <button type="submit" className={css.button}>
+            <span className={css.span}>
+              <FaSearch />
+            </span>
+          </button>
+          <Field
+            type="text"
+            autoComplete="off"
+            autoFocus
+            name="name"
+            className={css.input}
+            placeholder="Search images and photos"
+          />
+        </Form>
+      </Formik>
     </header>
   );
 };
