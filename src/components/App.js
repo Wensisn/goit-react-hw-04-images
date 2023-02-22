@@ -1,3 +1,4 @@
+import React from 'react';
 import { useEffect, useState } from 'react';
 import FetchImages from './FetchImages/FetchImages';
 import { ImageGallery } from './ImageGallery/ImageGallery';
@@ -5,6 +6,7 @@ import { Button } from './Button/Button';
 import { Searchbar } from './Searchbar/Searchbar';
 import { Loader } from './Loader/Loader';
 import { Modal } from './Modal/Modal';
+import { PetsData } from './ImageGallery/PetsData';
 export function OldApp() {
   const [searchQuery, setSearchQuery] = useState('');
   const [showModal, setShowModal] = useState(null);
@@ -69,10 +71,13 @@ export function OldApp() {
   return (
     <>
       <Searchbar setSearchQuery={OnHandleForSubmit} />
+      
 
       {photos && (
         <ImageGallery photos={photos} page={page} onOpenImage={openImage} />
       )}
+
+<PetsData />
 
       {photos.length > 0 && totalPictures !== photos.length && (
         <Button onSubmit={setSearchQuery} onClick={onLoadMore}>

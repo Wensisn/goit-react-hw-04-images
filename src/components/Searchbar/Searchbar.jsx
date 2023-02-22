@@ -1,7 +1,9 @@
 import { FaSearch } from 'react-icons/fa';
 import PropTypes from 'prop-types';
+import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import * as yup from 'yup';
+
 import css from './Searchbar.module.css';
 
 export const Searchbar = ({ setSearchQuery }) => {

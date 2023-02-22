@@ -1,7 +1,9 @@
+import React from 'react';
 import PropTypes from 'prop-types';
+
 import { ImageGalleryItem } from 'components/ImageGalleryItem/ImageGalleryItem';
 import css from './ImageGallery.module.css';
-
+// import { CeantrModal } from './CeantrModal'
 export function ImageGallery({ page, onOpenImage, photos }) {
   return (
     <main className={css.main}>
@@ -16,6 +18,7 @@ export function ImageGallery({ page, onOpenImage, photos }) {
           />
         ))}
       </ul>
+      {/* <CeantrModal /> */}
     </main>
   );
 }
@@ -31,3 +34,5 @@ ImageGallery.propTypes = {
   page: PropTypes.number.isRequired,
   onOpenImage: PropTypes.func.isRequired,
 };
+
+
